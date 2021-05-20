@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function Preloader() {
+const Preloader = () => {
     return (
     <div id="js-preloader" class="js-preloader">
         <div class="preloader-inner">
