@@ -5,7 +5,8 @@ import About from './layouts/About'
 import Service from './layouts/Service'
 import Portfolio from './layouts/Portfolio'
 import Blog from './layouts/Blog'
-import Contact from './layouts/Contact'
+import ContactHook from './layouts/ContactHook'
+import ContactFormic from './layouts/ContactFormic'
 
 export default function Home() {
   return (
@@ -21,7 +22,9 @@ export default function Home() {
 
       <Blog />
 
-      <Contact />
+      <ContactHook />
+
+      <ContactFormic />
     </>
   )
 }
