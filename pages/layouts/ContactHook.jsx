@@ -19,7 +19,8 @@ const ContactHook = () => {
   // }
 
   const onSubmit = data => {
-    alert(JSON.stringify(data));
+    // data.preventDefault();
+    // alert(JSON.stringify(data));
     console.log(data);
     reset()
   };
