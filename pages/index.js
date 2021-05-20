@@ -11,19 +11,17 @@ export default function Home() {
   return (
     
     <>
-    <Banner />
+      <Banner />
 
-    <About />
+      <About />
 
-    <Service />
+      <Service />
 
-    <Portfolio />
+      <Portfolio />
 
-    <Blog />
+      <Blog />
 
-    <Contact />
-
-  
+      <Contact />
     </>
   )
 }
