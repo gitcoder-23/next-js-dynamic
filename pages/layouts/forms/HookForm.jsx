@@ -33,7 +33,7 @@ const HookForm = () => {
             </Alert>
             
             }
-              <h3 style={{textAlign: "center"}}>React Hook</h3>
+              {/* <h3 style={{textAlign: "center"}}>React Hook</h3> */}
               <div className="col-lg-6">
                 <fieldset>
                   
