@@ -1,8 +1,12 @@
-import React from 'react'
-import { Formik, Form, Field, ErrorMessage, useField, Select } from "formik";
+import React, {useState} from 'react'
+import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import * as Yup from "yup";
+import { Alert } from 'react-bootstrap';
 
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const FormikForm = () => {
+
+  const [submitted, setSubmitted] = useState(false);
 
   const contactSchema = Yup.object().shape({
 
@@ -29,36 +33,44 @@ const FormikForm = () => {
         .required("Select any one slot")
         .oneOf(['Morning', 'Evening', 'Afternoon'], "Required"),
 
-      discuss: Yup.string()
+      discuss: Yup.array()
         .required("Select atleast one"),
-        // .oneOf(['Project Planning', 'General Discussion', 'Content Copyright', 'Sells Planning'], "Required"),
+        // .oneOf(['Project Planning', 'General Discussion', 'Content Copyright', 'Sells Planning'], "Select atleast one"),
 
       message: Yup.string()
         .required("Message is required")
         .min(8, "Must be 8 characters or more"),
   });
 
+  const initialValues = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    process: '',
+    time: '',
+    discuss: [],
+    message: '',
+  };
+
+  const onSubmit = async (values, submitProps) => {
+    console.log("form-values", values);
+    // console.log('submitProps', submitProps)
+    await sleep(500);
+    setSubmitted(true);
+    submitProps.resetForm()
+    // alert(JSON.stringify(values, null, 2));
+  }
+
     return (
       <>
         <Formik
-          // initialValues={initialValues}
-          initialValues={{
-            firstName: '',
-            lastName: '',
-            email: '',
-            process: '',
-            time: '',
-            discuss: '',
-            message: '',
-
-          }}
+          initialValues={initialValues}
           validationSchema={contactSchema}
-          onSubmit={(values) => {
-            console.log(values);
-          }}
+          onSubmit={onSubmit}
         >
           {(formik) => {
-             console.log('formik', formik.values)
+            
+            //  console.log('formik', formik.values)
             const { errors, touched, isValid, dirty } = formik;
             
             return (
@@ -66,6 +78,12 @@ const FormikForm = () => {
              
             <Form id="contact">
             <div className="row">
+            {submitted && 
+            <Alert variant="success">
+            <div class='success-message' style={{textAlign: "center"}}>Success! Thank you for your response</div>
+            </Alert>
+            
+            }
               <div className="col-lg-6">
                 <fieldset>
                   <Field type="text" name="firstName" id="firstName" 
@@ -108,38 +126,38 @@ const FormikForm = () => {
                 </fieldset>
               </div>
               <div className="col-lg-12">
-              <fieldset>
-                <span>Set Timing(Any one):</span>
-                <Field 
-                className={'con-radio'+ ' ' + (errors.time && touched.time ? "input-error" : '')}
-                type="radio" value="Morning" name="time" /> <span className="con-tm">Morning</span>
-                <Field className={'con-radio'+ ' ' + (errors.time && touched.time ? "input-error" : '')} type="radio" value="Evening" name="time" /> <span className="con-tm">Evening</span>
-                <Field className={'con-radio'+ ' ' + (errors.time && touched.time ? "input-error" : '')} type="radio" value="Afternoon" name="time" /> <span className="con-tm">Afternoon</span>
-                <ErrorMessage name="time" style={{color: 'red', marginBottom: "4px"}} component="span" className="error" />
-              </fieldset>
+                <fieldset>
+                  <span>Set Timing(Any one):</span>
+                  <Field 
+                  className={'con-radio'+ ' ' + (errors.time && touched.time ? "input-error" : '')}
+                  type="radio" value="Morning" name="time" /> <span className="con-tm">Morning</span>
+                  <Field className={'con-radio'+ ' ' + (errors.time && touched.time ? "input-error" : '')} type="radio" value="Evening" name="time" /> <span className="con-tm">Evening</span>
+                  <Field className={'con-radio'+ ' ' + (errors.time && touched.time ? "input-error" : '')} type="radio" value="Afternoon" name="time" /> <span className="con-tm">Afternoon</span>
+                  <ErrorMessage name="time" style={{color: 'red', marginBottom: "4px"}} component="p" className="error" />
+                </fieldset>
               </div>
-              <div className="col-lg-12">
-              <fieldset>
-                <span>Why need to discuss?</span> <br/>
-                <div className="cl-lg-6 check-box-css">
-                  <Field 
-                  className={'con-radio'+ ' ' + (errors.discuss && touched.discuss ? "input-error" : null)} 
-                  name="discuss" value="Project Planning"  type="checkbox" /> Project Planning
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <Field className={'con-radio'+ ' ' + (errors.discuss && touched.discuss ? "input-error" : null)}
-                  name="discuss" value="General Discussion"  type="checkbox"/> General Discussion
-                </div>
-                <div className="cl-lg-6 check-box-css">
-                  <Field 
-                  className={'con-radio'+ ' ' + (errors.discuss && touched.discuss ? "input-error" : null)} name="discuss" value="Content Copyright"  type="checkbox" /> Content Copyright
-                  &nbsp;&nbsp;&nbsp;&nbsp;
-                  <Field 
-                  className={'con-radio'+ ' ' + (errors.discuss && touched.discuss ? "input-error" : null)} 
-                  name="discuss" value="Sells Planning"  type="checkbox" /> Sells planning
-                </div>
-                <ErrorMessage name="discuss" style={{color: 'red', marginBottom: "4px"}} component="span" className="error" />
-              </fieldset>
-              </div>
+              {/* <div className="col-lg-12">
+                <fieldset>
+                  <span>Why need to discuss?</span> <br/>
+                  <div className="cl-lg-6 check-box-css">
+                    <Field 
+                    className={'con-radio'+ ' ' + (errors.discuss && touched.discuss ? "input-error" : null)} 
+                    name="discuss" value="Project Planning"  type="checkbox" /> Project Planning
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <Field className={'con-radio'+ ' ' + (errors.discuss && touched.discuss ? "input-error" : null)}
+                    name="discuss" value="General Discussion"  type="checkbox"/> General Discussion
+                  </div>
+                  <div className="cl-lg-6 check-box-css">
+                    <Field 
+                    className={'con-radio'+ ' ' + (errors.discuss && touched.discuss ? "input-error" : null)} name="discuss" value="Content Copyright"  type="checkbox" /> Content Copyright
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <Field 
+                    className={'con-radio'+ ' ' + (errors.discuss && touched.discuss ? "input-error" : null)} 
+                    name="discuss" value="Sells Planning"  type="checkbox" /> Sells planning
+                  </div>
+                  <ErrorMessage name="discuss" style={{color: 'red', marginBottom: "4px"}} component="span" className="error" />
+                </fieldset>
+              </div> */}
               <div className="col-lg-12">
                 <fieldset>
                   <Field as="textarea" name="message" 

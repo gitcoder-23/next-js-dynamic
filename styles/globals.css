@@ -20,6 +20,14 @@ form#contact span {
   padding: 0px 5px 0 20px;
 }
 
+form#contact p {
+  
+  font-size: 15px;
+  font-weight: 300;
+  color: #2a2a2a;
+  padding: 0px 5px 0 20px;
+}
+
 .con-radio {
   
   width: auto !important;
