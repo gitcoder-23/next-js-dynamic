@@ -10,6 +10,7 @@ const FormikForm = () => {
 
   const contactSchema = Yup.object().shape({
 
+
       firstName: Yup.string()
         .required("First name required")
         .min(3, "Must be 3 letters")

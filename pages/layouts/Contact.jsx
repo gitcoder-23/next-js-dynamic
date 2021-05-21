@@ -1,11 +1,23 @@
 import React from 'react'
+import Loadable from 'react-loadable';
+import Loading  from './forms/Loading'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import FormikForm from './forms/FormikForm';
-import HookForm from './forms/HookForm';
+// import FormikForm from './forms/FormikForm';
+// import HookForm from './forms/HookForm';
+
+const FormikForm = Loadable({
+  loader: () => import('./forms/FormikForm'),
+  loading: Loading,
+});
+
+const HookForm = Loadable({
+  loader: () => import('./forms/HookForm'),
+  loading: Loading,
+});
 
 
-const Contact = () => {
+const Contact = (props) => {
 
     return (
     <div id="contact" className="contact-us section">
@@ -29,7 +41,7 @@ const Contact = () => {
           <Tabs className="react-tab-class">
             <TabList>
             <Tab>Hook Form</Tab>
-            <Tab>Formic Form</Tab>
+            <Tab>Formik Form</Tab>
             </TabList>
 
             <TabPanel>
