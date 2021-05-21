@@ -50,7 +50,10 @@ span.con-tm {
   border-bottom: 4px solid #04a4ed;
 }
 
-
+.disabled {
+  pointer-events: none;
+  background: #efeeee !important;
+}
 
 
 
