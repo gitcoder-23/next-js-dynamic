@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import { useForm } from "react-hook-form";
 import { Alert } from 'react-bootstrap';
 
@@ -6,22 +6,29 @@ import { Alert } from 'react-bootstrap';
 
 
 
+
 const ContactHook = () => {
 
-  const [submitted, setSubmitted] = useState(false);
-
 // functions to build form returned by useForm() hook
-  const { register, handleSubmit, watch, reset, control,  formState: { errors, isSubmitting } } = useForm();
+  const { register, handleSubmit, watch, reset, control,  formState: { errors } } = useForm();
 
-  const onSubmit = async (data) => {
-    // alert(JSON.stringify(data));
-    console.log("Submission starting", data);
-    setSubmitted(true);
-    reset();
-  };
+  // const onSubmit = (data) => {
+  //   data.preventDefault();
+  //   console.log(data);
+  //   reset()
+  // }
+
+  const onSubmit = data => console.log(data);
     
 
   console.log(watch("example")); // watch input value by passing the name of it
+
+// function onSubmit(data) {
+//     // display form data on success
+//     alert('SUCCESS!! :-)\n\n' + JSON.stringify(data, null, 4));
+//     reset()
+// }
+
 
 
 
@@ -45,32 +52,25 @@ const ContactHook = () => {
        
         <div className="col-lg-6 wow fadeInRight" data-wow-duration="0.5s" data-wow-delay="0.25s">
 
-        {/* {isSuccessfullySubmitted && (
-          <div className="success" style={{color: 'red'}}>Form submitted successfully</div>
-        )} */}
-        
-
 
           <form id="contact" onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
-            {submitted && 
-            <Alert variant="danger">
-            <div class='success-message' style={{textAlign: "center"}}>Success! Thank you for your response</div>
-            </Alert>
-            
-            }
-
-
               <h2 style={{textAlign: "center"}}>React Hook</h2>
               <div className="col-lg-6">
                 <fieldset>
                   
                   <input type="text" name="firstName" id="firstName" placeholder="First Name" autoComplete="on"
                   {...register("firstName", { required: true, minLength: 3, maxLength: 20, pattern: /^[A-Za-z]+$/i })} />
-
-                    { errors.firstName?.type === "required" && <span style={{color: 'red'}}>First name required</span> }
-                    { errors.firstName?.type === "minLength" && <span style={{color: 'red'}}>Minimum length is 3 letters</span> }
-                    { errors.firstName?.type === "maxLength" && <span style={{color: 'red'}}>Maximum length is 20 letters</span> }
+                  {/* {errors.firstName && <span style={{color: 'red'}}>First name required</span>} */}
+                  
+                  {errors.firstName && 
+                  <Alert variant="danger">
+                    { errors.firstName?.type === "required" && <span >First name required</span> }
+                    { errors.firstName?.type === "minLength" && <span >Minimum length is 3 letters</span> }
+                    { errors.firstName?.type === "maxLength" && <span >Maximum length is 20 letters</span> }
+                    </Alert>
+                  }
+                    {/* // if errors then display alert style={{color: 'red'}} */}
 
 
 
@@ -79,10 +79,8 @@ const ContactHook = () => {
               <div className="col-lg-6">
                 <fieldset>
                   <input type="text" name="lastName" id="lastName" placeholder="Last Name" autoComplete="on"
-                  {...register("lastName", { required: true, minLength: 3, maxLength: 20, pattern: /^[A-Za-z]+$/i })} />
-                  {errors.lastName?.type === "required" && <span style={{color: 'red'}}>Last name required</span>}
-                  { errors.lastName?.type === "minLength" && <span style={{color: 'red'}}>Minimum length is 3 letters</span> }
-                  { errors.lastName?.type === "maxLength" && <span style={{color: 'red'}}>Maximum length is 20 letters</span> }
+                  {...register("lastName", { required: true, minLength: 2, maxLength: 20, pattern: /^[A-Za-z]+$/i })} />
+                  {errors.lastName && <span style={{color: 'red'}}>Last name required</span>}
                        
                 </fieldset>
               </div>
@@ -90,8 +88,7 @@ const ContactHook = () => {
                 <fieldset>
                   <input type="text" name="email" id="email" placeholder="Email" autoComplete="on"
                   {...register("email", { required: true, pattern: /\S+@\S+\.\S+/ })} />
-                  {errors.email?.type === "required" && <span style={{color: 'red'}}>Email is required</span>}
-                  {errors.email?.type === "pattern" && <span style={{color: 'red'}}>Type valid email</span>}
+                  {errors.email && <span style={{color: 'red'}}>Valid email is required</span>}
                 </fieldset>
               </div>
               <div className="col-lg-12">
@@ -111,7 +108,7 @@ const ContactHook = () => {
                 <input {...register("time", { required: true })} className="con-radio" type="radio" value="Morning" name="time" /> <span className="con-tm">Morning</span>
                 <input {...register("time", { required: true })} className="con-radio" type="radio" value="Evening" name="time" /> <span className="con-tm">Evening</span>
                 <input {...register("time", { required: true })} className="con-radio" type="radio" value="Afternoon" name="time" /> <span className="con-tm">Afternoon</span>
-                {errors.time && <p style={{color: 'red', padding: "0px 5px 0 20px"}}>Select any one slot</p>}
+                {errors.time && <span style={{color: 'red'}}>Select slot</span>}
               </fieldset>
               </div>
               <div className="col-lg-12">
@@ -134,8 +131,7 @@ const ContactHook = () => {
                 <fieldset>
                   <textarea name="message" type="text" className="form-control" id="message" placeholder="Message"
                   {...register("message", { required: true, minLength: 8})}></textarea>  
-                  {errors.message?.type === "required" && <span style={{color: 'red'}}>Message required</span>}
-                  {errors.message?.type === "minLength" && <span style={{color: 'red'}}>Minimum length is 8 characters</span>}
+                  {errors.message && <span style={{color: 'red'}}>Message required</span>}
                 </fieldset>
               </div>
               <div className="col-lg-12">
