@@ -54,7 +54,7 @@ const ContactHook = () => {
           <form id="contact" onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
             {submitted && 
-            <Alert variant="danger">
+            <Alert variant="success">
             <div class='success-message' style={{textAlign: "center"}}>Success! Thank you for your response</div>
             </Alert>
             
