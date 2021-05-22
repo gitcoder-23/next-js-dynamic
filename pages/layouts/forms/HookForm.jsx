@@ -14,7 +14,8 @@ const HookForm = () => {
 
   const onSubmit = async (data) => {
     // alert(JSON.stringify(data));
-    console.log("Submission starting", data);
+    // JSON.stringify(value, replacer, space)
+    console.log("Submitted", JSON.stringify(data, null, 2));
     setSubmitted(true);
     reset();
   };
@@ -41,6 +42,7 @@ const HookForm = () => {
                   {...register("firstName", { required: true, minLength: 3, maxLength: 20, pattern: /^[A-Za-z]+$/i })} />
 
                     { errors.firstName?.type === "required" && <span style={{color: 'red'}}>First name required</span> }
+                    { errors.firstName?.type === "pattern" && <span style={{color: 'red'}}>Only letter accepted</span> }
                     { errors.firstName?.type === "minLength" && <span style={{color: 'red'}}>Minimum length is 3 letters</span> }
                     { errors.firstName?.type === "maxLength" && <span style={{color: 'red'}}>Maximum length is 20 letters</span> }
 
@@ -53,6 +55,7 @@ const HookForm = () => {
                   <input type="text" name="lastName" id="lastName" placeholder="Last Name" autoComplete="on"
                   {...register("lastName", { required: true, minLength: 3, maxLength: 20, pattern: /^[A-Za-z]+$/i })} />
                   {errors.lastName?.type === "required" && <span style={{color: 'red'}}>Last name required</span>}
+                  {errors.lastName?.type === "pattern" && <span style={{color: 'red'}}>Only letter accepted</span>}
                   { errors.lastName?.type === "minLength" && <span style={{color: 'red'}}>Minimum length is 3 letters</span> }
                   { errors.lastName?.type === "maxLength" && <span style={{color: 'red'}}>Maximum length is 20 letters</span> }
                        

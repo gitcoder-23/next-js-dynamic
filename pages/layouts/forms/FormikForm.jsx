@@ -54,7 +54,7 @@ const FormikForm = () => {
   };
 
   const onSubmit = async (values, submitProps) => {
-    console.log("form-values", values);
+    console.log("form-values", JSON.stringify(values, null, 2));
     // console.log('submitProps', submitProps)
     await sleep(500);
     setSubmitted(true);
@@ -131,12 +131,19 @@ const FormikForm = () => {
                   <span>Set Timing(Any one):</span>
                   <Field 
                   className={'con-radio'+ ' ' + (errors.time && touched.time ? "input-error" : '')}
-                  type="radio" value="Morning" name="time" /> <span className="con-tm">Morning</span>
-                  <Field className={'con-radio'+ ' ' + (errors.time && touched.time ? "input-error" : '')} type="radio" value="Evening" name="time" /> <span className="con-tm">Evening</span>
-                  <Field className={'con-radio'+ ' ' + (errors.time && touched.time ? "input-error" : '')} type="radio" value="Afternoon" name="time" /> <span className="con-tm">Afternoon</span>
+                  type="radio" value="Morning" name="time" id="time" /> <span className="con-tm">Morning</span>
+                  <Field 
+                  className={'con-radio'+ ' ' + (errors.time && touched.time ? "input-error" : '')} 
+                  type="radio" value="Evening" name="time" id="time" /> <span className="con-tm">Evening</span>
+                  <Field 
+                  className={'con-radio'+ ' ' + (errors.time && touched.time ? "input-error" : '')} 
+                  type="radio" value="Afternoon" name="time" id="time" /> <span className="con-tm">Afternoon</span>
                   <ErrorMessage name="time" style={{color: 'red', marginBottom: "4px"}} component="p" className="error" />
                 </fieldset>
               </div>
+
+              
+              
               {/* <div className="col-lg-12">
                 <fieldset>
                   <span>Why need to discuss?</span> <br/>
