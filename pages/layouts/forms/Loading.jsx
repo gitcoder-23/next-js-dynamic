@@ -9,7 +9,7 @@ export default class Loading extends React.Component {
   render() {
     return (
 
-    <div style={{ marginTop : '60px' }}>
+    <div class="text-center" style={{ marginTop : '15%' }}>
       <link
         rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"

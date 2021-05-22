@@ -81,7 +81,7 @@ const FormikForm = () => {
             <div className="row">
             {submitted && 
             <Alert variant="success">
-            <div class='success-message' style={{textAlign: "center"}}>Success! Thank you for your response</div>
+            <div className='success-message' style={{textAlign: "center"}}>Success! Thank you for your response</div>
             </Alert>
             
             }
