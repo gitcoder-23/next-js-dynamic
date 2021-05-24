@@ -14,6 +14,7 @@ function CustomDocument() {
 
             {/* <title>Space Dynamic - SEO HTML5 Template</title> */}
             <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.1/css/font-awesome.css" rel="stylesheet" />
 
           
             <link rel="stylesheet" href="assets/css/fontawesome.css" />
