@@ -1,67 +1,40 @@
 import React, {useState} from 'react'
+
 import { useForm } from "react-hook-form";
 import { Alert } from 'react-bootstrap';
 
 
+const HookForm = () => {
 
-
-
-const ContactHook = () => {
-
+    
   const [submitted, setSubmitted] = useState(false);
 
-// functions to build form returned by useForm() hook
+  // functions to build form returned by useForm() hook
   const { register, handleSubmit, watch, reset, control,  formState: { errors, isSubmitting } } = useForm();
 
   const onSubmit = async (data) => {
     // alert(JSON.stringify(data));
-    console.log("Submission starting", data);
+    // JSON.stringify(value, replacer, space)
+    console.log("Submitted", JSON.stringify(data, null, 2));
     setSubmitted(true);
     reset();
   };
-    
 
   console.log(watch("example")); // watch input value by passing the name of it
 
 
-
-
     return (
-    <div id="contact" className="contact-us section">
-      <div className="container">
-        <div className="row">
-          <div className="col-lg-6 align-self-center wow fadeInLeft" data-wow-duration="0.5s" data-wow-delay="0.25s">
-            <div className="section-heading">
-             <h2>Feel Free To Send Us a Message About Your Website Needs</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed doer ket eismod tempor incididunt ut labore et dolores</p>
-             <div className="phone-info">
-              <h4>For any enquiry, Call Us: <span><i className="fa fa-phone"></i> 
-              <a href="#">010-020-0340</a></span>
-              </h4>
-            </div>
-            </div>
-          </div>
-       
-       
-        <div className="col-lg-6 wow fadeInRight" data-wow-duration="0.5s" data-wow-delay="0.25s">
+        <>
 
-        {/* {isSuccessfullySubmitted && (
-          <div className="success" style={{color: 'red'}}>Form submitted successfully</div>
-        )} */}
-        
-
-
-          <form id="contact" onSubmit={handleSubmit(onSubmit)}>
+        <form id="contact" onSubmit={handleSubmit(onSubmit)}>
             <div className="row">
             {submitted && 
-            <Alert variant="danger">
-            <div class='success-message' style={{textAlign: "center"}}>Success! Thank you for your response</div>
+            <Alert variant="success">
+            <div className='success-message' style={{textAlign: "center"}}>Success! Thank you for your response</div>
             </Alert>
             
             }
-
-
-              <h2 style={{textAlign: "center"}}>React Hook</h2>
+              {/* <h3 style={{textAlign: "center"}}>React Hook</h3> */}
               <div className="col-lg-6">
                 <fieldset>
                   
@@ -69,6 +42,7 @@ const ContactHook = () => {
                   {...register("firstName", { required: true, minLength: 3, maxLength: 20, pattern: /^[A-Za-z]+$/i })} />
 
                     { errors.firstName?.type === "required" && <span style={{color: 'red'}}>First name required</span> }
+                    { errors.firstName?.type === "pattern" && <span style={{color: 'red'}}>Only letter accepted</span> }
                     { errors.firstName?.type === "minLength" && <span style={{color: 'red'}}>Minimum length is 3 letters</span> }
                     { errors.firstName?.type === "maxLength" && <span style={{color: 'red'}}>Maximum length is 20 letters</span> }
 
@@ -81,6 +55,7 @@ const ContactHook = () => {
                   <input type="text" name="lastName" id="lastName" placeholder="Last Name" autoComplete="on"
                   {...register("lastName", { required: true, minLength: 3, maxLength: 20, pattern: /^[A-Za-z]+$/i })} />
                   {errors.lastName?.type === "required" && <span style={{color: 'red'}}>Last name required</span>}
+                  {errors.lastName?.type === "pattern" && <span style={{color: 'red'}}>Only letter accepted</span>}
                   { errors.lastName?.type === "minLength" && <span style={{color: 'red'}}>Minimum length is 3 letters</span> }
                   { errors.lastName?.type === "maxLength" && <span style={{color: 'red'}}>Maximum length is 20 letters</span> }
                        
@@ -141,6 +116,7 @@ const ContactHook = () => {
               <div className="col-lg-12">
                 <fieldset>
                   <button type="submit" id="form-submit" className="main-button ">Send Message</button>
+
                 </fieldset>
               </div>
             </div>
@@ -148,11 +124,9 @@ const ContactHook = () => {
               <img src="assets/images/contact-decoration.png" alt="" />
             </div>
           </form>
-        </div>
-      </div>
-    </div>
-  </div>
+        
+        </>
     )
 }
 
-export default ContactHook
+export default HookForm

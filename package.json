@@ -9,11 +9,14 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^2.5.1",
+    "formik": "^2.2.7",
     "next": "10.2.0",
     "react": "17.0.2",
     "react-bootstrap": "^1.6.0",
     "react-dom": "17.0.2",
     "react-hook-form": "^7.6.2",
+    "react-loadable": "^5.5.0",
+    "react-tabs": "^3.2.2",
     "yup": "^0.32.9"
   }
 }
