@@ -40,19 +40,19 @@ const Contact = (props) => {
 
           <Tabs className="react-tab-class">
             <TabList>
-            <Tab>Hook Form</Tab>
             <Tab>Formik Form</Tab>
+            <Tab>Hook Form</Tab>
             </TabList>
 
             <TabPanel>
-
-            <HookForm />
+            <FormikForm />
+            
 
             </TabPanel>
 
             <TabPanel>
 
-            <FormikForm />
+            <HookForm />
 
             </TabPanel>
           </Tabs>

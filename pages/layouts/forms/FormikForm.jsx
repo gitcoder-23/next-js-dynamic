@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Formik, Form, Field, ErrorMessage, useField } from "formik";
 import * as Yup from "yup";
 import { Alert } from 'react-bootstrap';
+import CheckboxGroup from "./CheckboxGroup";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 const FormikForm = () => {
@@ -16,6 +17,7 @@ const FormikForm = () => {
     time: '',
     discuss: [],
     message: '',
+    toppings: [],
   };
 
   const contactSchema = Yup.object().shape({
@@ -66,6 +68,17 @@ const FormikForm = () => {
         <Formik
           initialValues={initialValues}
           validationSchema={contactSchema}
+          validate={(values) => {
+            if (!values.toppings.length) {
+              return { toppings: "Please choose at least one topping" };
+            }
+    
+            if (values.toppings.find((_) => _ === "pineapple")) {
+              return { toppings: "Urgh! Who eats pineapple on pizza?" };
+            }
+    
+            return {};
+          }}
           onSubmit={onSubmit}
         >
           {(formik) => {
@@ -142,7 +155,7 @@ const FormikForm = () => {
               </div>
 
                <div className="col-lg-12">
-                <fieldset>
+                {/* <fieldset>
                   <span>Why need to discuss?</span> <br/>
                   <div className="cl-lg-6 check-box-css">
                     <Field className="con-radio"
@@ -160,7 +173,17 @@ const FormikForm = () => {
                     name="discuss" id="discuss-4" value="Sells Planning"  type="checkbox" /> Sells planning
                   </div>
                   <ErrorMessage name="discuss" style={{color: 'red', marginBottom: "4px"}} component="span" className="error" />
-                </fieldset>
+                </fieldset> */}
+
+                <CheckboxGroup
+                  name="toppings"
+                  label="What pizza toppings do you like?"
+                >
+                  <CheckboxGroup.Item label="Pepperoni" value="pepperoni" />
+                  <CheckboxGroup.Item label="Sausage" value="sausage" />
+                  <CheckboxGroup.Item label="Mushroom" value="mushroom" />
+                  <CheckboxGroup.Item label="Pineapple" value="pineapple" />
+                </CheckboxGroup>
               </div>
 
               
