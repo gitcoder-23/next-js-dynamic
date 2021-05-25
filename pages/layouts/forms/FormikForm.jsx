@@ -8,8 +8,17 @@ const FormikForm = () => {
 
   const [submitted, setSubmitted] = useState(false);
 
-  const contactSchema = Yup.object().shape({
+  const initialValues = {
+    firstName: '',
+    lastName: '',
+    email: '',
+    process: '',
+    time: '',
+    discuss: [],
+    message: '',
+  };
 
+  const contactSchema = Yup.object().shape({
 
       firstName: Yup.string()
         .required("First name required")
@@ -35,23 +44,13 @@ const FormikForm = () => {
         .oneOf(['Morning', 'Evening', 'Afternoon'], "Required"),
 
       discuss: Yup.array()
-        .required("Select atleast one"),
+        .required("At least one checkbox is required"),
         // .oneOf(['Project Planning', 'General Discussion', 'Content Copyright', 'Sells Planning'], "Select atleast one"),
 
       message: Yup.string()
         .required("Message is required")
         .min(8, "Must be 8 characters or more"),
   });
-
-  const initialValues = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    process: '',
-    time: '',
-    discuss: [],
-    message: '',
-  };
 
   const onSubmit = async (values, submitProps) => {
     console.log("form-values", JSON.stringify(values, null, 2));
@@ -139,6 +138,28 @@ const FormikForm = () => {
                   className={'con-radio'+ ' ' + (errors.time && touched.time ? "input-error" : '')} 
                   type="radio" value="Afternoon" name="time" id="time" /> <span className="con-tm">Afternoon</span>
                   <ErrorMessage name="time" style={{color: 'red', marginBottom: "4px"}} component="p" className="error" />
+                </fieldset>
+              </div>
+
+               <div className="col-lg-12">
+                <fieldset>
+                  <span>Why need to discuss?</span> <br/>
+                  <div className="cl-lg-6 check-box-css">
+                    <Field className="con-radio"
+                    name="discuss" id="discuss-1" value="Project Planning"  type="checkbox" /> Project Planning
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <Field className="con-radio"
+                    name="discuss" id="discuss-2" value="General Discussion"  type="checkbox"/> General Discussion
+                  </div>
+                  <div className="cl-lg-6 check-box-css">
+                    <Field 
+                    className="con-radio" 
+                    name="discuss" id="discuss-3" value="Content Copyright"  type="checkbox" /> Content Copyright
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <Field className="con-radio"
+                    name="discuss" id="discuss-4" value="Sells Planning"  type="checkbox" /> Sells planning
+                  </div>
+                  <ErrorMessage name="discuss" style={{color: 'red', marginBottom: "4px"}} component="span" className="error" />
                 </fieldset>
               </div>
 
