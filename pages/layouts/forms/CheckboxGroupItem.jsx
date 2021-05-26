@@ -8,6 +8,7 @@ export default function CheckboxGroupItem({ value, label }) {
   return (
     <label style={{ display: "block" }}>
       <input
+      className="con-radio"
         {...field}
         type="checkbox"
         checked={checked}
@@ -18,7 +19,7 @@ export default function CheckboxGroupItem({ value, label }) {
             helpers.setValue([...field.value, value]);
           }
         }}
-      />
+      /> &nbsp;
       {label}
     </label>
   );

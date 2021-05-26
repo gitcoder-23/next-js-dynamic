@@ -10,11 +10,11 @@ function CheckboxGroup({ name, label, children }) {
     <CheckboxProvider value={{ field, helpers, meta }}>
       <fieldset>
         <legend>{label}</legend>
+        {children}
         <ErrorMessage
           name={name}
           render={(msg) => <span style={{ color: "red" }}>{msg}</span>}
         />
-        {children}
       </fieldset>
     </CheckboxProvider>
   );

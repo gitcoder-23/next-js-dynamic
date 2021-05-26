@@ -17,7 +17,6 @@ const FormikForm = () => {
     time: '',
     discuss: [],
     message: '',
-    toppings: [],
   };
 
   const contactSchema = Yup.object().shape({
@@ -45,8 +44,8 @@ const FormikForm = () => {
         .required("Select any one slot")
         .oneOf(['Morning', 'Evening', 'Afternoon'], "Required"),
 
-      discuss: Yup.array()
-        .required("At least one checkbox is required"),
+      // discuss: Yup.array()
+      //   .required("At least one checkbox is required"),
         // .oneOf(['Project Planning', 'General Discussion', 'Content Copyright', 'Sells Planning'], "Select atleast one"),
 
       message: Yup.string()
@@ -69,12 +68,12 @@ const FormikForm = () => {
           initialValues={initialValues}
           validationSchema={contactSchema}
           validate={(values) => {
-            if (!values.toppings.length) {
-              return { toppings: "Please choose at least one topping" };
+            if (!values.discuss.length) {
+              return { discuss: "Please choose at least one" };
             }
     
-            if (values.toppings.find((_) => _ === "pineapple")) {
-              return { toppings: "Urgh! Who eats pineapple on pizza?" };
+            if (values.discuss.find((_) => _ === "Project Planning")) {
+              return { discuss: "Urgh! Who eats pineapple on pizza?" };
             }
     
             return {};
@@ -120,7 +119,7 @@ const FormikForm = () => {
               <div className="col-lg-12">
                 <fieldset>
                   <Field type="text" name="email" id="email" 
-                  placeholder="Your Email" className={errors.firstName && touched.firstName ? "input-error" : null} />
+                  placeholder="Email" className={errors.firstName && touched.firstName ? "input-error" : null} />
                   <ErrorMessage name="email" style={{color: 'red', marginBottom: "4px"}} component="span" className="error" />
                 </fieldset>
               </div>
@@ -154,62 +153,22 @@ const FormikForm = () => {
                 </fieldset>
               </div>
 
-               <div className="col-lg-12">
-                {/* <fieldset>
-                  <span>Why need to discuss?</span> <br/>
-                  <div className="cl-lg-6 check-box-css">
-                    <Field className="con-radio"
-                    name="discuss" id="discuss-1" value="Project Planning"  type="checkbox" /> Project Planning
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <Field className="con-radio"
-                    name="discuss" id="discuss-2" value="General Discussion"  type="checkbox"/> General Discussion
-                  </div>
-                  <div className="cl-lg-6 check-box-css">
-                    <Field 
-                    className="con-radio" 
-                    name="discuss" id="discuss-3" value="Content Copyright"  type="checkbox" /> Content Copyright
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <Field className="con-radio"
-                    name="discuss" id="discuss-4" value="Sells Planning"  type="checkbox" /> Sells planning
-                  </div>
-                  <ErrorMessage name="discuss" style={{color: 'red', marginBottom: "4px"}} component="span" className="error" />
-                </fieldset> */}
+               <div className="col-lg-12 discuss-cls">
 
                 <CheckboxGroup
-                  name="toppings"
-                  label="What pizza toppings do you like?"
-                >
-                  <CheckboxGroup.Item label="Pepperoni" value="pepperoni" />
-                  <CheckboxGroup.Item label="Sausage" value="sausage" />
-                  <CheckboxGroup.Item label="Mushroom" value="mushroom" />
-                  <CheckboxGroup.Item label="Pineapple" value="pineapple" />
+                  name="discuss"
+                  label="Why need to discuss?">
+
+                  <div className="cl-lg-6 check-box-css custom-box">                    
+                  <CheckboxGroup.Item label="Project Planning" value="project-planning" />
+                  <CheckboxGroup.Item label="General Discussion" value="general-discussion" />
+                  </div>
+                  <div className="cl-lg-6 check-box-css custom-box"> 
+                  <CheckboxGroup.Item label="Content Copyright" value="content-copyright" />
+                  <CheckboxGroup.Item label="Sells Planning" value="sells-planning" />
+                  </div>
                 </CheckboxGroup>
               </div>
-
-              
-              
-              {/* <div className="col-lg-12">
-                <fieldset>
-                  <span>Why need to discuss?</span> <br/>
-                  <div className="cl-lg-6 check-box-css">
-                    <Field 
-                    className={'con-radio'+ ' ' + (errors.discuss && touched.discuss ? "input-error" : null)} 
-                    name="discuss" value="Project Planning"  type="checkbox" /> Project Planning
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <Field className={'con-radio'+ ' ' + (errors.discuss && touched.discuss ? "input-error" : null)}
-                    name="discuss" value="General Discussion"  type="checkbox"/> General Discussion
-                  </div>
-                  <div className="cl-lg-6 check-box-css">
-                    <Field 
-                    className={'con-radio'+ ' ' + (errors.discuss && touched.discuss ? "input-error" : null)} name="discuss" value="Content Copyright"  type="checkbox" /> Content Copyright
-                    &nbsp;&nbsp;&nbsp;&nbsp;
-                    <Field 
-                    className={'con-radio'+ ' ' + (errors.discuss && touched.discuss ? "input-error" : null)} 
-                    name="discuss" value="Sells Planning"  type="checkbox" /> Sells planning
-                  </div>
-                  <ErrorMessage name="discuss" style={{color: 'red', marginBottom: "4px"}} component="span" className="error" />
-                </fieldset>
-              </div> */}
               <div className="col-lg-12">
                 <fieldset>
                   <Field as="textarea" name="message" 

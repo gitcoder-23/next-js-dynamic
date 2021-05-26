@@ -11,14 +11,14 @@ const HeaderMenu = () => {
   }
 
 
-  const linkActiveOnReady = (id) => {
-    document.querySelectorAll('.scroll-to-section a').forEach(el => el.classList.remove('active'));
-    document.querySelector(`${id}-link`).classList.add('active');
-  }
+  // const linkActiveOnPageLoad = (id) => {
+  //   document.querySelectorAll('.scroll-to-section a').forEach(el => el.classList.remove('active'));
+  //   document.querySelector(`${id}-link`).classList.add('active');
+  // }
 
-  useEffect(() => {
-    linkActiveOnReady(window.location.hash);
-  }, []);
+  // useEffect(() => {
+  //   linkActiveOnPageLoad(window.location.hash);
+  // }, []);
 
     return (
       <header className="header-area header-sticky wow slideInDown" data-wow-duration="0.75s" data-wow-delay="0s">

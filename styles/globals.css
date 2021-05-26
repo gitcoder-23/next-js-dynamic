@@ -18,6 +18,7 @@ form#contact span {
   font-weight: 300;
   color: #2a2a2a;
   padding: 0px 5px 0 20px;
+  font-weight: 400;
 }
 
 form#contact p {
@@ -205,10 +206,19 @@ span.con-tm {
 }
 
 
+.discuss-cls legend {
+  font-size: 15px;
+  font-weight: 300;
+  color: #2a2a2a;
+  padding: 0px 5px 0 20px;
+  font-weight: 400;
+}
 
 
-
-
+.custom-box {
+  display: flex;
+  width: 100%;
+}
 
 
 
