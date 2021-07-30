@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useRef} from 'react'
 
 import { useForm } from "react-hook-form";
 import { Alert } from 'react-bootstrap';
@@ -11,6 +11,8 @@ const HookForm = () => {
 
   // functions to build form returned by useForm() hook
   const { register, handleSubmit, watch, reset, control,  formState: { errors, isSubmitting } } = useForm();
+  const password = useRef({});
+  password.current = watch("password", "");
 
   const onSubmit = async (data) => {
     // alert(JSON.stringify(data));
@@ -113,6 +115,41 @@ const HookForm = () => {
                   {errors.message?.type === "minLength" && <span style={{color: 'red'}}>Minimum length is 8 characters</span>}
                 </fieldset>
               </div>
+
+
+              <div className="col-lg-12">
+                <fieldset>
+                  
+                  <input type="password" name="password" id="password" placeholder="Password" autoComplete="on"
+                  {...register("password", { required: true, minLength: 8, pattern: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/i })} />
+
+                    { errors.password?.type === "required" && <span style={{color: 'red'}}>Password required</span> }
+                    { errors.password?.type === "pattern" && <span style={{color: 'red'}}>One Uppercase, One Lowercase, One Number and one special case Character</span> }
+                    { errors.password?.type === "minLength" && <span style={{color: 'red'}}>Minimum length is 8 letters</span> }
+                  
+                </fieldset>
+              </div>
+
+
+              <div className="col-lg-12">
+                <fieldset>
+
+                  <input
+                    name="repassword"
+                    type="password" placeholder="Re-Password"
+                    {...register("repassword", {
+                      required: "Re password required",
+                      validate: value =>
+                        value === password.current || "The password does not match"
+                    })}
+                />
+                {errors.repassword && <p style={{color: 'red'}}>{errors.repassword.message}</p>}
+
+
+                </fieldset>
+              </div>
+
+
               <div className="col-lg-12">
                 <fieldset>
                   <button type="submit" id="form-submit" className="main-button ">Send Message</button>
