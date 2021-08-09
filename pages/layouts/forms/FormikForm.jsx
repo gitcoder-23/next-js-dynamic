@@ -128,7 +128,7 @@ const FormikForm = () => {
                   <Field as="select" name="process" id="process"
                   // className={errors.process && touched.process ? ' is-invalid' : ''}
                   // className={'form-control' + (errors.role && touched.role ? ' is-invalid' : '')}
-                  className={errors.firstName && touched.firstName ? "input-error" : null}>
+                  className={errors.process && touched.process ? "input-error" : null}>
                     <option value=''>Select option</option>
                     <option value='Video'>Video call</option>
                     <option value='Audio'>Audio call</option>

@@ -11,6 +11,7 @@ const HookForm = () => {
 
   // functions to build form returned by useForm() hook
   const { register, handleSubmit, watch, reset, control,  formState: { errors, isSubmitting } } = useForm();
+  // pass - confirm validation
   const password = useRef({});
   password.current = watch("password", "");
 
